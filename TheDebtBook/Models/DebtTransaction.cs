@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace TheDebtBook.Models
 {
-    public class Transaction
+
+    public class DebtTransaction
     {
-        public int Id { get; set; } // Unique identifier for database purposes
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        [Indexed]
+        public int DebtorId { get; set; }
+
+        [MaxLength(500)]
         public string Description { get; set; }
+
         public double Amount { get; set; }
+
         public DateTime Date { get; set; }
-        public TransactionType Type { get; set; } // Enum representing Debit or Credit
+
+        public TransactionType Type { get; set; }
     }
 
     public enum TransactionType
@@ -20,5 +31,6 @@ namespace TheDebtBook.Models
         Debit,
         Credit
     }
+
 
 }

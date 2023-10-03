@@ -1,9 +1,13 @@
+using TheDebtBook.ViewModels;
+
 namespace TheDebtBook;
 
 public partial class DebtorDetailsPage : ContentPage
 {
-	public DebtorDetailsPage()
-	{
-		InitializeComponent();
-	}
+    public DebtorDetailsPage(int debtorId)
+    {
+        InitializeComponent();
+        BindingContext = new DebtorDetailsViewModel(debtorId);
+    }
+
 }
