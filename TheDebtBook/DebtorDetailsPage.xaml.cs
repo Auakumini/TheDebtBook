@@ -1,13 +1,14 @@
 using TheDebtBook.ViewModels;
+using Microsoft.Maui.Controls;
 
-namespace TheDebtBook;
-
-public partial class DebtorDetailsPage : ContentPage
+namespace TheDebtBook
 {
-    public DebtorDetailsPage(int debtorId)
+    public partial class DebtorDetailsPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = new DebtorDetailsViewModel(debtorId);
+        public DebtorDetailsPage(int debtorId)
+        {
+            InitializeComponent();
+            BindingContext = new DebtorDetailsViewModel(debtorId);
+        }
     }
-
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using System.Transactions;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using TheDebtBook.Data;
 using TheDebtBook.Models;
-using TheDebtBook.Data; 
 
 namespace TheDebtBook.ViewModels
 {
@@ -17,8 +13,6 @@ namespace TheDebtBook.ViewModels
         private string _newTransactionDescription;
         private double _newTransactionAmount;
         private int _debtorId;
-
-        public ICommand AddTransactionCommand { get; }
 
         public ObservableCollection<DebtTransaction> TransactionsList
         {
@@ -38,11 +32,13 @@ namespace TheDebtBook.ViewModels
             set => SetProperty(ref _newTransactionAmount, value);
         }
 
+        public ICommand AddTransactionCommand { get; }
+
         public DebtorDetailsViewModel(int debtorId)
         {
             _debtorId = debtorId;
             LoadTransactions();
-            AddTransactionCommand = new Command(OnAddTransaction);
+            AddTransactionCommand = new RelayCommand(OnAddTransaction);
         }
 
         private async void LoadTransactions()
@@ -54,7 +50,6 @@ namespace TheDebtBook.ViewModels
         {
             if (string.IsNullOrWhiteSpace(NewTransactionDescription) || NewTransactionAmount == 0)
             {
-                // Handle validation errors, e.g., show a message to the user
                 return;
             }
 
@@ -64,21 +59,18 @@ namespace TheDebtBook.ViewModels
                 Amount = NewTransactionAmount,
                 Date = DateTime.Now,
                 Type = NewTransactionAmount > 0 ? TransactionType.Credit : TransactionType.Debit,
-                DebtorId = _debtorId  // Associate the transaction with the debtor
+                DebtorId = _debtorId
             };
 
-            // Save the new transaction to the SQLite database
+            // Save the new transaction to the database
             DataBaseHelper.AddDebtTransactionAsync(newTransaction);
 
-            // Refresh the transactions list
+            // Reload the transactions
             LoadTransactions();
 
-            // Optionally, reset the input fields
+            // Clear the input fields
             NewTransactionDescription = string.Empty;
             NewTransactionAmount = 0;
         }
-
-
     }
-
 }

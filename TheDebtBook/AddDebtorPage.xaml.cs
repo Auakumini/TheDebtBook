@@ -1,6 +1,12 @@
-namespace TheDebtBook;
+using Microsoft.Maui.Controls;
 
-public partial class AddDebtorPage : ContentPage
+namespace TheDebtBook
 {
-
+    public partial class AddDebtorPage : ContentPage
+    {
+        public AddDebtorPage()
+        {
+            InitializeComponent();
+        }
+    }
 }

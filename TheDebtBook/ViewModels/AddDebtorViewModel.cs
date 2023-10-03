@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using TheDebtBook.Data;
 using TheDebtBook.Models;
 
 namespace TheDebtBook.ViewModels
@@ -12,8 +10,6 @@ namespace TheDebtBook.ViewModels
     {
         private string _debtorName;
         private double _amountOwed;
-
-        public ICommand AddDebtorCommand { get; }
 
         public string DebtorName
         {
@@ -27,33 +23,31 @@ namespace TheDebtBook.ViewModels
             set => SetProperty(ref _amountOwed, value);
         }
 
+        public ICommand AddDebtorCommand { get; }
+
         public AddDebtorViewModel()
         {
-            AddDebtorCommand = new Command(OnAddDebtor);
+            AddDebtorCommand = new RelayCommand(OnAddDebtor);
         }
 
         private void OnAddDebtor()
         {
             if (string.IsNullOrWhiteSpace(DebtorName) || AmountOwed <= 0)
             {
-                // Handle validation errors, e.g., show a message to the user
                 return;
             }
 
-            // Create a new Debtor object
             Debtor newDebtor = new Debtor
             {
                 Name = DebtorName,
                 TotalAmountOwed = AmountOwed
             };
 
-            // TODO: Add the new debtor to a collection or database
+            // Save the new debtor to the database
+            DataBaseHelper.AddDebtorAsync(newDebtor);
 
-            // Optionally, reset the input fields
-            DebtorName = string.Empty;
-            AmountOwed = 0;
+            // Navigate back to the main page after adding
+            Shell.Current.GoToAsync("..");
         }
-
     }
-
 }

@@ -16,9 +16,6 @@ namespace TheDebtBook
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            // Register ViewModel-related services
-            builder.Services.AddViewModels();
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

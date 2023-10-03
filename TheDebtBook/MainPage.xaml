@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheDebtBook.MainPage"
              xmlns:viewmodels="clr-namespace:TheDebtBook.ViewModels">
-        <ContentPage.BindingContext>
-            <viewmodels:MainPageViewModel />
-        </ContentPage.BindingContext>
+    <ContentPage.BindingContext>
+        <viewmodels:MainPageViewModel />
+    </ContentPage.BindingContext>
 
     <StackLayout Padding="20">
         <Label Text="Debtors Overview:" FontAttributes="Bold" />
 
-        <ListView ItemsSource="{Binding DebtorsList}">
+        <ListView ItemsSource="{Binding DebtorsList}"
+                  ItemSelected="OnDebtorSelected">
             <!-- Define the appearance of each item in the list -->
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -21,6 +22,5 @@
 
         <Button Text="Add New Debtor" Command="{Binding NavigateToAddDebtorCommand}" Margin="0,20,0,0" />
     </StackLayout>
-
 
 </ContentPage>

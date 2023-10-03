@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:TheDebtBook.ViewModels"
-             x:Class="TheDebtBook.AddDebtorPage">
+             x:Class="TheDebtBook.AddDebtorPage"
+             xmlns:viewmodels="clr-namespace:TheDebtBook.ViewModels">
     <ContentPage.BindingContext>
         <viewmodels:AddDebtorViewModel />
     </ContentPage.BindingContext>
 
     <StackLayout Padding="20">
-        <Label Text="Debtor Name:" />
-        <Entry Placeholder="Enter debtor's name" Text="{Binding DebtorName}" />
+        <Label Text="Add New Debtor" FontAttributes="Bold" />
 
-        <Label Text="Initial Amount Owed:" Margin="0,10,0,0" />
-        <Entry Placeholder="Enter amount" Text="{Binding AmountOwed}" Keyboard="Numeric" />
+        <Entry Placeholder="Debtor Name" Text="{Binding DebtorName}" Margin="0,20,0,0" />
+        <Entry Placeholder="Amount Owed" Text="{Binding AmountOwed}" Keyboard="Numeric" Margin="0,20,0,0" />
 
         <Button Text="Add Debtor" Command="{Binding AddDebtorCommand}" Margin="0,20,0,0" />
     </StackLayout>
-
 </ContentPage>
