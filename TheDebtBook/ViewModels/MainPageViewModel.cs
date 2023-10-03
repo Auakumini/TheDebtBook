@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -27,10 +28,19 @@ namespace TheDebtBook.ViewModels
             NavigateToDebtorDetailsCommand = new RelayCommand<int>(OnNavigateToDebtorDetails);
         }
 
-        private async void LoadDebtors()
+        private async Task LoadDebtors()
         {
-            DebtorsList = new ObservableCollection<Debtor>(await DataBaseHelper.GetAllDebtorsAsync());
+            try
+            {
+                DebtorsList = new ObservableCollection<Debtor>(await DataBaseHelper.GetAllDebtorsAsync());
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                Debug.WriteLine(ex.Message);
+            }
         }
+
 
         private void OnNavigateToAddDebtor()
         {

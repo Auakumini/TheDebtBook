@@ -27,12 +27,13 @@ namespace TheDebtBook.Data
                 return _database;
             }
         }
-        public static void InitializeDatabase()
+        public static async Task InitializeDatabaseAsync()
         {
-            Database.CreateTableAsync<Debtor>().Wait();
-            Database.CreateTableAsync<DebtTransaction>().Wait();
+            await Database.CreateTableAsync<Debtor>();
+            await Database.CreateTableAsync<DebtTransaction>();
         }
-        
+
+
         //Debtor CRUD
         public static Task<int> AddDebtorAsync(Debtor debtor)
         {

@@ -15,7 +15,7 @@
             <!-- Define the appearance of each item in the list -->
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding DebtorName}" Detail="{Binding TotalAmountOwed}" />
+                    <TextCell Text="{Binding Name}" Detail="{Binding TotalAmountOwed}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

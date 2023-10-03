@@ -17,7 +17,12 @@ namespace TheDebtBook.Models
         public string Name { get; set; }
 
         public double TotalAmountOwed { get; set; }
+
+        [Ignore]
         public ObservableCollection<DebtTransaction> Transactions { get; set; } = new ObservableCollection<DebtTransaction>();
+        [Ignore]
+        public ObservableCollection<Debtor> DebtorsList { get; set; } = new ObservableCollection<Debtor>();
+
     }
 
 }
