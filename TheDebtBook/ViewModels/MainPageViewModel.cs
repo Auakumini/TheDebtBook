@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheDebtBook.Models;
-using TheDebtBook.Data;  // Add this line
+using TheDebtBook.Data;
+
+
 
 namespace TheDebtBook.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
+
         private ObservableCollection<Debtor> _debtorsList;
 
         public ICommand NavigateToAddDebtorCommand { get; }

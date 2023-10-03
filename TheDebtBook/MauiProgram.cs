@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using CommunityToolkit.Mvvm;
 
 namespace TheDebtBook
 {
@@ -15,8 +16,11 @@ namespace TheDebtBook
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Register ViewModel-related services
+            builder.Services.AddViewModels();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
