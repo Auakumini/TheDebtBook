@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,10 +10,14 @@ namespace TheDebtBook.Models
 {
     public class Debtor
     {
-        public int Id { get; set; } // Unique identifier for database purposes
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        [MaxLength(250)]
         public string Name { get; set; }
+
         public double TotalAmountOwed { get; set; }
-        public ObservableCollection<Transaction> Transactions { get; set; } = new ObservableCollection<Transaction>();
+        public ObservableCollection<DebtTransaction> Transactions { get; set; } = new ObservableCollection<DebtTransaction>();
     }
 
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheDebtBook.Models;
+using TheDebtBook.Data;  // Add this line
 
 namespace TheDebtBook.ViewModels
 {
@@ -23,7 +24,13 @@ namespace TheDebtBook.ViewModels
 
         public MainPageViewModel()
         {
+            LoadDebtors();
             NavigateToAddDebtorCommand = new Command(OnNavigateToAddDebtor);
+        }
+
+        private async void LoadDebtors()
+        {
+            DebtorsList = new ObservableCollection<Debtor>(await DataBaseHelper.GetAllDebtorsAsync());
         }
 
         private void OnNavigateToAddDebtor()
@@ -32,5 +39,4 @@ namespace TheDebtBook.ViewModels
         }
 
     }
-
 }

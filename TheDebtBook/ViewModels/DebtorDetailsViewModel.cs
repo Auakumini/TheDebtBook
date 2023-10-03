@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 //using System.Transactions;
 using System.Windows.Input;
 using TheDebtBook.Models;
+using TheDebtBook.Data; 
 
 namespace TheDebtBook.ViewModels
 {
     public class DebtorDetailsViewModel : BaseViewModel
     {
-        private ObservableCollection<Transaction> _transactionsList;
+        private ObservableCollection<DebtTransaction> _transactionsList;
         private string _newTransactionDescription;
         private double _newTransactionAmount;
+        private int _debtorId;
 
         public ICommand AddTransactionCommand { get; }
 
-        public ObservableCollection<Transaction> TransactionsList
+        public ObservableCollection<DebtTransaction> TransactionsList
         {
             get => _transactionsList;
             set => SetProperty(ref _transactionsList, value);
@@ -36,9 +38,16 @@ namespace TheDebtBook.ViewModels
             set => SetProperty(ref _newTransactionAmount, value);
         }
 
-        public DebtorDetailsViewModel()
+        public DebtorDetailsViewModel(int debtorId)
         {
+            _debtorId = debtorId;
+            LoadTransactions();
             AddTransactionCommand = new Command(OnAddTransaction);
+        }
+
+        private async void LoadTransactions()
+        {
+            TransactionsList = new ObservableCollection<DebtTransaction>(await DataBaseHelper.GetTransactionsForDebtorAsync(_debtorId));
         }
 
         private void OnAddTransaction()
@@ -49,21 +58,26 @@ namespace TheDebtBook.ViewModels
                 return;
             }
 
-            // Create a new Transaction object
-            Transaction newTransaction = new Transaction
+            DebtTransaction newTransaction = new DebtTransaction
             {
                 Description = NewTransactionDescription,
                 Amount = NewTransactionAmount,
                 Date = DateTime.Now,
-                Type = NewTransactionAmount > 0 ? TransactionType.Credit : TransactionType.Debit
+                Type = NewTransactionAmount > 0 ? TransactionType.Credit : TransactionType.Debit,
+                DebtorId = _debtorId  // Associate the transaction with the debtor
             };
 
-            // TODO: Add the new transaction to the selected debtor's transactions list or database
+            // Save the new transaction to the SQLite database
+            DataBaseHelper.AddDebtTransactionAsync(newTransaction);
+
+            // Refresh the transactions list
+            LoadTransactions();
 
             // Optionally, reset the input fields
             NewTransactionDescription = string.Empty;
             NewTransactionAmount = 0;
         }
+
 
     }
 
