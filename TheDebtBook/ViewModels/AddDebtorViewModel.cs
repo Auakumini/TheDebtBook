@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheDebtBook.ViewModel
+namespace TheDebtBook.ViewModels
 {
-    internal class ViewModelStink
+    internal class AddDebtorViewModel
     {
     }
 }
