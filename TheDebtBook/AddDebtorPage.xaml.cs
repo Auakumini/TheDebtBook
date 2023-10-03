@@ -1,9 +1,6 @@
 namespace TheDebtBook;
 
-public partial class NewPage1 : ContentPage
+public partial class AddDebtorPage : ContentPage
 {
-	public NewPage1()
-	{
-		InitializeComponent();
-	}
+
 }

@@ -7,5 +7,14 @@
         <viewmodels:AddDebtorViewModel />
     </ContentPage.BindingContext>
 
-    <!-- Input fields and buttons for adding a debtor -->
+    <StackLayout Padding="20">
+        <Label Text="Debtor Name:" />
+        <Entry Placeholder="Enter debtor's name" Text="{Binding DebtorName}" />
+
+        <Label Text="Initial Amount Owed:" Margin="0,10,0,0" />
+        <Entry Placeholder="Enter amount" Text="{Binding AmountOwed}" Keyboard="Numeric" />
+
+        <Button Text="Add Debtor" Command="{Binding AddDebtorCommand}" Margin="0,20,0,0" />
+    </StackLayout>
+
 </ContentPage>

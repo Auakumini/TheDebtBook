@@ -7,5 +7,23 @@
         <viewmodels:DebtorDetailsViewModel />
     </ContentPage.BindingContext>
 
-    <!-- List and input fields for viewing and adding transactions -->
+    <StackLayout Padding="20">
+        <Label Text="Transactions:" FontAttributes="Bold" />
+
+        <ListView ItemsSource="{Binding TransactionsList}">
+            <!-- Define the appearance of each item in the list -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding TransactionDescription}" Detail="{Binding TransactionAmount}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Text="Add New Transaction:" Margin="0,20,0,0" />
+        <Entry Placeholder="Transaction description" Text="{Binding NewTransactionDescription}" />
+        <Entry Placeholder="Transaction amount" Text="{Binding NewTransactionAmount}" Keyboard="Numeric" />
+
+        <Button Text="Add Transaction" Command="{Binding AddTransactionCommand}" Margin="0,20,0,0" />
+    </StackLayout>
+
 </ContentPage>
