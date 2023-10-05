@@ -26,7 +26,7 @@ namespace TheDebtBook
             BindingContext = new DebtorDetailsViewModel(selectedDebtor.Id);
 
             // Load transactions when the page is created
-            (BindingContext as DebtorDetailsViewModel)?.LoadTransactionsAsync();
+            //(BindingContext as DebtorDetailsViewModel)?.LoadTransactionsAsync();
         }
 
         protected override async void OnAppearing()
@@ -37,7 +37,7 @@ namespace TheDebtBook
             SelectedDebtor = await DataBaseHelper.GetDebtorByIdAsync((BindingContext as DebtorDetailsViewModel)?.DebtorId ?? 0);
 
             // Load transactions asynchronously when the page appears
-            await (BindingContext as DebtorDetailsViewModel)?.LoadTransactionsAsync();
+            //await (BindingContext as DebtorDetailsViewModel)?.LoadTransactionsAsync();
         }
 
 

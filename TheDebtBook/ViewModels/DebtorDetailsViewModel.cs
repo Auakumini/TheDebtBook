@@ -72,14 +72,20 @@ namespace TheDebtBook.ViewModels
             {
                 var transactions = await DataBaseHelper.GetTransactionsForDebtorAsync(_debtorId);
 
+                System.Diagnostics.Debug.WriteLine("Loaded transactions:");
+                TransactionsList.Clear(); // Clear existing items before adding new ones
+
                 foreach (var transaction in transactions)
                 {
-                    TransactionsList.Add(transaction);
+                    System.Diagnostics.Debug.WriteLine($"Transaction: {transaction.Id}, Description: {transaction.Description}");
+                    TransactionsList.Add(transaction); // Add transactions to the list
                 }
 
                 TransactionsLoaded = true; // Set the flag to indicate that transactions have been loaded
             }
         }
+
+
 
         public DebtorDetailsViewModel(int debtorId)
         {

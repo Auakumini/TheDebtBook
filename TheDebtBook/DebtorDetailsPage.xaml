@@ -6,7 +6,12 @@
     <StackLayout Padding="20">
         <!-- Display debtor details here -->
         <Label Text="Debtor Name" />
+        <Label Text="{Binding DebtorName}" />
+        <!-- Bind to DebtorName property -->
+
         <Label Text="Total Amount Owed" />
+        <Label Text="{Binding TotalAmountOwed}" />
+        <!-- Bind to TotalAmountOwed property -->
 
         <Label Text="Transactions:" FontAttributes="Bold" />
 
