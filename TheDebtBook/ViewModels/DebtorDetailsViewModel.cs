@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -7,30 +8,18 @@ using TheDebtBook.Models;
 
 namespace TheDebtBook.ViewModels
 {
-    public class DebtorDetailsViewModel : BaseViewModel
+    public partial class DebtorDetailsViewModel : ObservableObject
     {
+        [ObservableProperty]
         private ObservableCollection<DebtTransaction> _transactionsList;
+
+        [ObservableProperty]
         private string _newTransactionDescription;
+
+        [ObservableProperty]
         private double _newTransactionAmount;
+
         private int _debtorId;
-
-        public ObservableCollection<DebtTransaction> TransactionsList
-        {
-            get => _transactionsList;
-            set => SetProperty(ref _transactionsList, value);
-        }
-
-        public string NewTransactionDescription
-        {
-            get => _newTransactionDescription;
-            set => SetProperty(ref _newTransactionDescription, value);
-        }
-
-        public double NewTransactionAmount
-        {
-            get => _newTransactionAmount;
-            set => SetProperty(ref _newTransactionAmount, value);
-        }
 
         public ICommand AddTransactionCommand { get; }
 

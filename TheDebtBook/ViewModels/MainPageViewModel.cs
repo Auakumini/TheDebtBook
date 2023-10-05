@@ -8,22 +8,17 @@ using TheDebtBook.Models;
 
 namespace TheDebtBook.ViewModels
 {
-    public class MainPageViewModel : BaseViewModel
+    public partial class MainPageViewModel : ObservableObject
     {
+        [ObservableProperty]
         private ObservableCollection<Debtor> _debtorsList;
-
-        public ObservableCollection<Debtor> DebtorsList
-        {
-            get => _debtorsList;
-            set => SetProperty(ref _debtorsList, value);
-        }
 
         public ICommand NavigateToAddDebtorCommand { get; }
         public ICommand NavigateToDebtorDetailsCommand { get; }
 
         public MainPageViewModel()
         {
-            LoadDebtors();
+            _ = LoadDebtors();
             NavigateToAddDebtorCommand = new RelayCommand(OnNavigateToAddDebtor);
             NavigateToDebtorDetailsCommand = new RelayCommand<int>(OnNavigateToDebtorDetails);
         }
@@ -40,7 +35,6 @@ namespace TheDebtBook.ViewModels
                 Debug.WriteLine(ex.Message);
             }
         }
-
 
         private void OnNavigateToAddDebtor()
         {
