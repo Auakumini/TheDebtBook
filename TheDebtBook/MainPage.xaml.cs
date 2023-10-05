@@ -21,5 +21,11 @@ namespace TheDebtBook
             // Deselect the item in the ListView
             ((ListView)sender).SelectedItem = null;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as MainPageViewModel)?.LoadDebtors();
+        }
     }
 }

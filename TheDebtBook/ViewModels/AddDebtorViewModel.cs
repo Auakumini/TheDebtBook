@@ -47,7 +47,7 @@ namespace TheDebtBook.ViewModels
             DataBaseHelper.AddDebtorAsync(newDebtor);
 
             // Navigate back to the main page after adding
-            Shell.Current.GoToAsync("..");
+            Shell.Current.GoToAsync("//MainPage");
         }
     }
 }

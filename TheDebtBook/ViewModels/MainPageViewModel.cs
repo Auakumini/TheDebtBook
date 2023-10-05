@@ -28,7 +28,7 @@ namespace TheDebtBook.ViewModels
             NavigateToDebtorDetailsCommand = new RelayCommand<int>(OnNavigateToDebtorDetails);
         }
 
-        private async Task LoadDebtors()
+        public async Task LoadDebtors()
         {
             try
             {
@@ -44,12 +44,12 @@ namespace TheDebtBook.ViewModels
 
         private void OnNavigateToAddDebtor()
         {
-            Shell.Current.GoToAsync("AddDebtorPage");
+            Shell.Current.GoToAsync("//AddDebtorPage");
         }
 
         private void OnNavigateToDebtorDetails(int debtorId)
         {
-            Shell.Current.GoToAsync($"DebtorDetailsPage?debtorId={debtorId}");
+            Shell.Current.GoToAsync($"//DebtorDetailsPage?debtorId={debtorId}");
         }
     }
 }
