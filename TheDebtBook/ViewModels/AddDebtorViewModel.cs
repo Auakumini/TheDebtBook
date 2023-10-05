@@ -6,13 +6,22 @@ using TheDebtBook.Models;
 
 namespace TheDebtBook.ViewModels
 {
-    public partial class AddDebtorViewModel : ObservableObject
+    public class AddDebtorViewModel : BaseViewModel
     {
-        [ObservableProperty]
         private string _debtorName;
-
-        [ObservableProperty]
         private double _amountOwed;
+
+        public string DebtorName
+        {
+            get => _debtorName;
+            set => SetProperty(ref _debtorName, value);
+        }
+
+        public double AmountOwed
+        {
+            get => _amountOwed;
+            set => SetProperty(ref _amountOwed, value);
+        }
 
         public ICommand AddDebtorCommand { get; }
 
@@ -28,12 +37,11 @@ namespace TheDebtBook.ViewModels
                 return;
             }
 
-            Debtor newDebtor = new()
+            Debtor newDebtor = new Debtor
             {
                 Name = DebtorName,
                 TotalAmountOwed = AmountOwed
             };
-
             // Save the new debtor to the database
             DataBaseHelper.AddDebtorAsync(newDebtor);
 

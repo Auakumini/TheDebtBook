@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:TheDebtBook.ViewModels"
              x:Class="TheDebtBook.DebtorDetailsPage">
 
     <StackLayout Padding="20">
+        <!-- Display debtor details here -->
+        <Label Text="Debtor Name" />
+        <Label Text="Total Amount Owed" />
+
         <Label Text="Transactions:" FontAttributes="Bold" />
 
         <ListView ItemsSource="{Binding TransactionsList}">
@@ -17,8 +20,10 @@
         </ListView>
 
         <Label Text="Add New Transaction:" Margin="0,20,0,0" />
+
+        <!-- Bind the Entry elements to the ViewModel properties -->
         <Entry Placeholder="Transaction description" Text="{Binding NewTransactionDescription}" />
-        <Entry Placeholder="Transaction amount" Text="{Binding NewTransactionAmount}" Keyboard="Numeric" />
+        <Entry Placeholder="Transaction amount" Keyboard="Numeric" Text="{Binding NewTransactionAmount}" />
 
         <Button Text="Add Transaction" Command="{Binding AddTransactionCommand}" Margin="0,20,0,0" />
     </StackLayout>

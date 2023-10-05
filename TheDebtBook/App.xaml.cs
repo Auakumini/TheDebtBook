@@ -7,10 +7,14 @@ namespace TheDebtBook
         public App()
         {
             InitializeComponent();
-
-            Task.Run(async () => await DataBaseHelper.InitializeDatabaseAsync()).Wait();
-
+            InitializeDatabaseAsync();
             MainPage = new AppShell();
         }
+
+        private async void InitializeDatabaseAsync()
+        {
+            await DataBaseHelper.InitializeDatabaseAsync();
+        }
+
     }
 }

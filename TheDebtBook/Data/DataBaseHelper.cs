@@ -75,6 +75,11 @@ namespace TheDebtBook.Data
         {
             return Database.DeleteAsync(transaction);
         }
+        public static async Task ClearAllTransactionsAsync()
+        {
+            await Database.ExecuteAsync("DELETE FROM DebtTransaction");
+        }
+
 
 
     }

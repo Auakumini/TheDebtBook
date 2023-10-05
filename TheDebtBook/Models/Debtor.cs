@@ -23,6 +23,17 @@ namespace TheDebtBook.Models
         [Ignore]
         public ObservableCollection<Debtor> DebtorsList { get; set; } = new ObservableCollection<Debtor>();
 
+        public Debtor()
+        {
+        }
+
+        public Debtor(string name, double totalAmountOwed)
+        {
+            Name = name;
+            TotalAmountOwed = totalAmountOwed;
+        }
     }
+
+
 
 }

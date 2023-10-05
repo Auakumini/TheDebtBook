@@ -10,17 +10,18 @@ namespace TheDebtBook
         {
             InitializeComponent();
         }
-
-        private void OnDebtorSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnDebtorSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is Debtor selectedDebtor)
             {
-                (BindingContext as MainPageViewModel)?.NavigateToDebtorDetailsCommand.Execute(selectedDebtor.Id);
+                // Pass the selected debtor object when navigating to the DebtorDetailsPage
+                await Navigation.PushAsync(new DebtorDetailsPage(selectedDebtor));
             }
 
             // Deselect the item in the ListView
             ((ListView)sender).SelectedItem = null;
         }
+
 
         protected override void OnAppearing()
         {
@@ -28,4 +29,5 @@ namespace TheDebtBook
             (BindingContext as MainPageViewModel)?.LoadDebtors();
         }
     }
+
 }
